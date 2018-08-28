@@ -1,0 +1,41 @@
+beforeCreate:
+  - docker-compose up -d
+
+afterTerminate:
+  - docker-compose down
+
+sync:
+    defaults:
+      mode: "two-way-resolved"
+      ignore:
+        paths:
+          - .DS_Store
+    source-sync:
+      alpha: "./source"
+      beta: "volume://source-sync"
+      mode: "two-way-resolved"
+      configurationAlpha : 
+        permissions : 
+          defaultFileMode :  666 
+          defaultDirectoryMode :  777 
+      configurationBeta:
+        permissions:
+          defaultFileMode: 0666
+          defaultDirectoryMode: 0777
+          defaultOwner: "id:33"
+          defaultGroup: "id:33"
+      ignore:
+        paths:
+          - .DS_Store
+    database-sync:
+      alpha: "./.docker/database"
+      beta: "volume://database-sync"
+    mysql-init-data-sync:
+      alpha: "./.docker/config/mysql/docker-entrypoint-initdb.d"
+      beta: "volume://mysql-init-data-sync"
+    ssl-sync:
+      alpha: "./.docker/config/ssl"
+      beta: "volume://ssl-sync"
+    ssh-sync:
+      alpha: "./.docker/ssh"
+      beta: "volume://ssh-sync"

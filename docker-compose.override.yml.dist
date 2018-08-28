@@ -1,8 +1,16 @@
-version: "3.4"
+version: "3.7"
 
 services:
-    app:
-        ports:
-            - 80:80
-            - 443:443
-            - 3000:3000
+  mariadb:
+    container_name: mariadb_service
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASSWORD_ROOT_MYSQL}
+    ports:
+      - 3306:3306
+    volumes:
+      - '.docker/config/mysql/docker.cnf:/etc/mysql/conf.d/docker.cnf'
+      - 'database-sync:/var/tmp/database'
+      - 'mysql-init-data-sync:/docker-entrypoint-initdb.d'
+    networks:
+      - docker-server

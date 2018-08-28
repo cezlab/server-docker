@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  phpmyadmin:
+    container_name: phpmyadmin_service
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    ports:
+      - 9090:80
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASSWORD_ROOT_MYSQL}
+      PMA_HOST: mariadb
+      UPLOAD_LIMIT: '300M'
+      MAX_EXECUTION_TIME: '-1'
+      MEMORY_LIMIT: '-1'
+    networks:
+      docker-server:
+        ipv4_address: 172.28.0.7

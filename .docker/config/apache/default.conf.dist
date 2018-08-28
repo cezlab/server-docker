@@ -1,0 +1,38 @@
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot /var/www/html/source
+
+    <Directory /var/www/html/source>
+        Options -Indexes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <FilesMatch \.php$>
+        SetHandler "proxy:fcgi://php-fpm:9000"
+    </FilesMatch>
+
+    ErrorLog ${APACHE_LOG_DIR}/localhost-error.log
+    CustomLog ${APACHE_LOG_DIR}/localhost-access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName localhost
+    DocumentRoot /var/www/html/source
+    SSLEngine on
+    SSLCertificateFile "/var/tmp/ssl/certificate.crt"
+    SSLCertificateKeyFile "/var/tmp/ssl/certificate.key"
+
+    <Directory /var/www/html/source>
+        Options -Indexes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <FilesMatch \.php$>
+        SetHandler "proxy:fcgi://php-fpm:9000"
+    </FilesMatch>
+
+    ErrorLog ${APACHE_LOG_DIR}/https-localhost-error.log
+    CustomLog ${APACHE_LOG_DIR}/https-localhost.log combined
+</VirtualHost>

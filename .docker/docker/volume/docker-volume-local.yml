@@ -1,0 +1,38 @@
+version: "3.7"
+
+volumes:
+  source-sync:
+    name: source-sync
+    driver: local
+    driver_opts:
+      type: none
+      device: './source'
+      o: bind
+  database-sync:
+    name: database-sync
+    driver: local
+    driver_opts:
+      type: none
+      device: './.docker/database'
+      o: bind
+  ssl-sync:
+    name: ssl-sync
+    driver: local
+    driver_opts:
+      type: none
+      device: './.docker/config/ssl'
+      o: bind
+  ssh-sync:
+    name: ssh-sync
+    driver: local
+    driver_opts:
+      type: none
+      device: './.docker/ssh'
+      o: bind
+  mysql-init-data-sync:
+    name: mysql-init-data-sync
+    driver: local
+    driver_opts:
+      type: none
+      device: './.docker/config/mysql/docker-entrypoint-initdb.d'
+      o: bind

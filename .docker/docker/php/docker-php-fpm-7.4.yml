@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  php-fpm:
+    container_name: php_fpm_service
+    image: cezlab/php-7.4-fpm
+    depends_on:
+      - mariadb
+      - mailhog
+      - redis
+    links:
+      - mariadb
+      - mailhog
+      - redis
+    ports:
+      - 9074:9000
+    volumes:
+      - 'ssh-sync:/root/.ssh'
+      - 'source-sync:/var/www/html/source'
+      - '.docker/config/php/php.ini:/usr/local/etc/php/php.ini'
+    networks:
+      docker-server:
+        ipv4_address: 172.28.0.9

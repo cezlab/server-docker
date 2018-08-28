@@ -1,0 +1,18 @@
+version: "3.7"
+
+volumes:
+  source-sync:
+    name: source-sync
+    external: true
+  database-sync:
+    name: database-sync
+    external: true
+  mysql-init-data-sync:
+    name: mysql-init-data-sync
+    external: true
+  ssl-sync:
+    name: ssl-sync
+    external: true
+  ssh-sync:
+    name: ssh-sync
+    external: true

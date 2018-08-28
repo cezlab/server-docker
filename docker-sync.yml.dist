@@ -1,0 +1,37 @@
+version: 2
+syncs:
+  source-sync:
+    src: './source'
+    sync_excludes:
+      - '.git'
+      - '.idea'
+      - '.docker'
+      - '.DS_Store'
+  database-sync:
+    src: './.docker/database'
+    sync_excludes:
+      - '.git'
+      - '.idea'
+      - '.docker'
+      - '.DS_Store'
+  ssh-sync:
+    src: './.docker/ssh'
+    sync_excludes:
+      - '.git'
+      - '.idea'
+      - '.docker'
+      - '.DS_Store'
+  ssl-sync:
+    src: './.docker/config/ssl'
+    sync_excludes:
+      - '.git'
+      - '.idea'
+      - '.docker'
+      - '.DS_Store'
+  mysql-init-data-sync:
+    src: './.docker/config/mysql/docker-entrypoint-initdb.d'
+    sync_excludes:
+      - '.git'
+      - '.idea'
+      - '.docker'
+      - '.DS_Store'

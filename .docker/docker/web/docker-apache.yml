@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  web_service:
+    container_name: web_service
+    image: cezlab/apache
+    depends_on:
+      - mariadb
+      - php-fpm
+    links:
+      - mariadb
+      - php-fpm
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - 'ssl-sync:/var/tmp/ssl'
+      - 'source-sync:/var/www/html/source'
+      - '.docker/config/apache/default.conf:/etc/apache2/sites-available/000-default.conf'
+    networks:
+      docker-server:
+        ipv4_address: 172.28.0.10
