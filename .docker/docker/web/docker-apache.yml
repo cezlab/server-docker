@@ -5,10 +5,8 @@ services:
     container_name: web_service
     image: cezlab/apache
     depends_on:
-      - mariadb
       - php-fpm
     links:
-      - mariadb
       - php-fpm
     ports:
       - 80:80

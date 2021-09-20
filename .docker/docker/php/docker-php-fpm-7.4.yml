@@ -6,12 +6,8 @@ services:
     image: cezlab/php-7.4-fpm
     depends_on:
       - mariadb
-      - mailhog
-      - redis
     links:
       - mariadb
-      - mailhog
-      - redis
     ports:
       - 9074:9000
     volumes:

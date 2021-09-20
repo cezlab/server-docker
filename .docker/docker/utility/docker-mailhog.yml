@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  mailhog:
+    container_name: mailhog_service
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      docker-server:
+        ipv4_address: 172.28.0.3
