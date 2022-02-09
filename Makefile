@@ -10,6 +10,7 @@ REDIS := false
 MAILHOG := false
 SEARCH := false
 FILE_ADD := -f
+FULL := false
 DIRECTORY_SEPARATOR := /
 DOCKER_FILE := ./docker-compose.yml
 DOCKER_OVERRIDE_FILE := ./docker-compose.override.yml
@@ -26,6 +27,12 @@ DOCKER_SERVICES += $(FILE_ADD) $(DOCKER_NETWORK_PATH)docker-network-$(NETWORK).y
 DOCKER_SERVICES += $(FILE_ADD) $(DOCKER_VOLUME_PATH)docker-volume-$(VOLUME).yml
 DOCKER_SERVICES += $(FILE_ADD) $(DOCKER_WEB_PATH)docker-$(WEB).yml
 DOCKER_SERVICES += $(FILE_ADD) $(DOCKER_PHP_PATH)docker-php-fpm-$(PHP).yml
+
+ifeq '$(FULL)' 'true'
+PHPMYADMIN := true
+REDIS := true
+MAILHOG := true
+endif
 
 ifeq '$(REDIS)' 'true'
 DOCKER_SERVICES += $(FILE_ADD) $(DOCKER_REDIS_PATH)docker-redis.yml
